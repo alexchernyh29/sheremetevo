@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/nullstyle.css">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>Sheremetevo</title>
+
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=3a4c53e4-f675-4886-a2d6-c9990383e48a&lang=ru_RU"
+    type="text/javascript"></script>
+
+  <style>
+    .form-block {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .form-block form {
+      position: relative;
+      width: 440px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #0000ff;
+      border-radius: 4px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .form-block .form-row {
+      border-bottom: 1px solid #0000ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      font-size: 20px;
+    }
+
+    .form-block .form-row:last-child {
+      border-bottom: none;
+    }
+
+    .form-block .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row option {
+      width: 140px;
+      height: 30px;
+      padding-left: 5px;
+      border: 1px solid #0000ff;
+      border-radius: 4px;
+    }
+
+    .form-row button {
+      margin: 0 auto;
+      padding: 12px 20px;
+      background-color: #0000ff;
+      border-radius: 4px;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-block hide" id="form">
+    <form>
+      <img class="close" src="../img/icon/clear.svg" id="formClose">
+      <div class="date-time form-row">
+        Дата/Время:
+        <input type="date" id="formDate">
+        <input type="time" id="formTime">
+      </div>
+      <div class="form-row">
+        Ячейка:
+        <input type="text" id="formCoord">
+      </div>
+      <div class="form-row">
+        Снег:
+        <select id="formSnow">
+          <option>Тип 1</option>
+          <option>Тип 2</option>
+          <option>Тип 3</option>
+        </select>
+      </div>
+      <div class="form-row">
+        Лед:
+        <input type="checkbox" id="formLed">
+      </div>
+      <div class="form-row">
+        Кол-во техники:
+        <input type="number" id="formCars">
+      </div>
+      <!-- <div class="form-row">
+        Стадия:
+        <span class="stages" id="formStages">1/3</span>
+      </div> -->
+      <div class="form-row">
+        <button id="formSave">Сохранить</button>
+      </div>
+    </form>
+  </div>
+  <div class="map" id="map">
+
+  </div>
+  <div class="control">
+    <div class="task-block">
+      <h2 class="task-block__title h2-title">Задачи</h2>
+      <div class="tasks">
+        <div class="task" id="tasks">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+        <div class="task">
+          <img src="../img/icon/done.svg" alt="" class="task-img">
+          <p class="task-text">Чистка 001231 на участке А1</p>
+        </div>
+      </div>
+    </div>
+    <div class="chat-block">
+      <h2 class="chat-block__title h2-title">Чат</h2>
+      <div class="chat">
+        <div class="chat-row chat-row_left">
+          <div class="message">Привет</div>
+        </div>
+        <div class="chat-row chat-row_right">
+          <div class="message">Привет</div>
+        </div>
+        <div class="chat-row chat-row_left">
+          <div class="message">Через сколько приедет техника?</div>
+        </div>
+        <div class="chat-row chat-row_right">
+          <div class="message">Через 15 минут</div>
+        </div>
+        <div class="chat-row chat-row_left">
+          <div class="message">Спасибо!</div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Ваше сообщение">
+        <button>></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="/js/main.js"></script> -->
+  <script src="../js/engineer.js"></script>
+</body>
+
+</html>
